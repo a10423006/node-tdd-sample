@@ -1,4 +1,5 @@
 import FacebookHelper from '../../../src/facebook/helper.js'
+<<<<<<< HEAD
 import task1_initModel from '../../../src/database/task1';
 
 describe.only('facebook-helper', () => {
@@ -15,10 +16,21 @@ describe.only('facebook-helper', () => {
     models = await task1_initModel()
     friends = await facebookHelper.getFriends()
     
+=======
+
+describe('facebook-helper', () => {
+  let facebookHelper = null;
+
+  before((done) => {
+    let userId = "";
+    let token = "";
+    facebookHelper = new FacebookHelper({userId, token});
+>>>>>>> f2946ca60db316933c936fa5f6d18e9b1cc6af01
     console.log(facebookHelper);
     done();
   });
 
+<<<<<<< HEAD
   it("get friends list and create friend model", async (done) => {
     try {
       
@@ -31,11 +43,21 @@ describe.only('facebook-helper', () => {
       
       console.log("create model: ", result.dataValues)
       
+=======
+  it("get friends list", async (done) => {
+    try {
+      let friends = await facebookHelper.getFriends();
+      console.log("friends", friends);
+      (friends != null).should.be.true;
+      friends.should.be.Array;
+      friends[0].should.have.keys("name", "id");
+>>>>>>> f2946ca60db316933c936fa5f6d18e9b1cc6af01
       done();
     } catch (e) {
       done(e);
     }
   });
+<<<<<<< HEAD
   
   it("find your friend", async (done) => {
     try {
@@ -106,6 +128,9 @@ describe.only('facebook-helper', () => {
       }
     });
   
+=======
+
+>>>>>>> f2946ca60db316933c936fa5f6d18e9b1cc6af01
   it.skip("publish post", async (done) => {
     try {
       let post = {
