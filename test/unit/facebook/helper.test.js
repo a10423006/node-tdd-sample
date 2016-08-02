@@ -21,6 +21,12 @@ describe.only('facebook-helper', () => {
 
   it("get friends list and create friend model", async (done) => {
     try {
+      
+      friends[0].should.has.keys(
+        'id',
+        'name'
+      );
+      
       result = await models.Friend.bulkCreate(friends)
       
       console.log("create model: ", result.dataValues)
@@ -71,8 +77,35 @@ describe.only('facebook-helper', () => {
       } catch (e) {
         done(e);
       }
-    });
+  });
+    
+  it("destroy friend", async (done) => {
+      try {;
 
+        result = await models.Friend.findOne({
+          where: {
+             id: "100000416627762"
+          },
+        });
+        
+        await result.destroy();
+
+        const check = await models.Friend.findOne({
+          where: {
+            id: "100000416627762"
+          },
+        });
+        (check === null).should.be.true;
+        
+        result = await models.Friend.findAll();
+
+        console.log("delete friend: ", result.dataValues)
+        done();
+      } catch (e) {
+        done(e);
+      }
+    });
+  
   it.skip("publish post", async (done) => {
     try {
       let post = {
