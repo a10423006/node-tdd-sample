@@ -48,6 +48,30 @@ describe.only('facebook-helper', () => {
         done(e);
       }
   });
+  
+  it("update friend's email", async (done) => {
+      try {
+        const f_email = "hellojs@trunk.studio";
+
+        result = await models.Friend.findOne({
+          where: {
+             id: "768676876489122"
+          },
+        });
+        
+        result.email = f_email;
+        
+        await result.save();
+        
+        result.email.should.be.eq(f_email);
+        
+        console.log("updata email: ", result.dataValues)
+        
+        done();
+      } catch (e) {
+        done(e);
+      }
+    });
 
   it.skip("publish post", async (done) => {
     try {
